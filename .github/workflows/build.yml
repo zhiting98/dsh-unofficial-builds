@@ -43,7 +43,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24.22.3
           cache: pnpm
           cache-dependency-path: src/pnpm-lock.yaml
 
@@ -54,6 +54,21 @@ jobs:
       - name: Build
         working-directory: src
         run: pnpm run build
+
+      - name: Write desktop env
+        working-directory: src/apps/desktop
+        shell: bash
+        run: |
+          cat > .env.windows <<'EOF'
+          DSH_DESKTOP_APP_ID=com.github.zhiting98.dsh
+          DSH_DESKTOP_AUTO_UPDATE_ENV=test
+          DSH_DESKTOP_MANDATORY_UPDATE_TEST_ORIGIN=https://updates.invalid
+          DSH_DESKTOP_MANDATORY_UPDATE_PROD_ORIGIN=https://updates.invalid
+          DSH_DESKTOP_MANDATORY_UPDATE_CONFIG='{"allowedAuthOrigins":["https://login.invalid"]}'
+          DOWNLOAD_TEST_ORIGIN=https://downloads.invalid
+          DOWNLOAD_TEST_RELEASE_ID=0123456789abcdef0123456789abcdef
+          DSH_DESKTOP_WINDOWS_COMPRESSION_LEVEL=3
+          EOF
 
       - name: Prepare desktop package
         working-directory: src
@@ -94,7 +109,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24.22.3
           cache: pnpm
           cache-dependency-path: src/pnpm-lock.yaml
 
@@ -105,6 +120,22 @@ jobs:
       - name: Build
         working-directory: src
         run: pnpm run build
+
+      - name: Write desktop env
+        working-directory: src/apps/desktop
+        shell: bash
+        run: |
+          cat > .env.macos <<'EOF'
+          DSH_DESKTOP_APP_ID=com.github.zhiting98.dsh
+          DSH_DESKTOP_AUTO_UPDATE_ENV=test
+          DSH_DESKTOP_MANDATORY_UPDATE_TEST_ORIGIN=https://updates.invalid
+          DSH_DESKTOP_MANDATORY_UPDATE_PROD_ORIGIN=https://updates.invalid
+          DSH_DESKTOP_MANDATORY_UPDATE_CONFIG='{"allowedAuthOrigins":["https://login.invalid"]}'
+          DOWNLOAD_TEST_ORIGIN=https://downloads.invalid
+          DOWNLOAD_TEST_RELEASE_ID=0123456789abcdef0123456789abcdef
+          DSH_DESKTOP_MACOS_PACK_CONCURRENCY=4
+          DSH_DESKTOP_MACOS_ZIP_COMPRESSION_LEVEL=3
+          EOF
 
       - name: Prepare desktop package
         working-directory: src
@@ -126,9 +157,6 @@ jobs:
 
   mac-x64:
     name: macOS x64
-    # Intel runner. If GitHub retires macos-13, switch to a self-hosted
-    # Intel runner or verify that the upstream mac-x64 packaging script
-    # can cross-build on macos-14.
     runs-on: macos-13
     steps:
       - name: Checkout upstream
@@ -147,7 +175,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24.22.3
           cache: pnpm
           cache-dependency-path: src/pnpm-lock.yaml
 
@@ -158,6 +186,22 @@ jobs:
       - name: Build
         working-directory: src
         run: pnpm run build
+
+      - name: Write desktop env
+        working-directory: src/apps/desktop
+        shell: bash
+        run: |
+          cat > .env.macos <<'EOF'
+          DSH_DESKTOP_APP_ID=com.github.zhiting98.dsh
+          DSH_DESKTOP_AUTO_UPDATE_ENV=test
+          DSH_DESKTOP_MANDATORY_UPDATE_TEST_ORIGIN=https://updates.invalid
+          DSH_DESKTOP_MANDATORY_UPDATE_PROD_ORIGIN=https://updates.invalid
+          DSH_DESKTOP_MANDATORY_UPDATE_CONFIG='{"allowedAuthOrigins":["https://login.invalid"]}'
+          DOWNLOAD_TEST_ORIGIN=https://downloads.invalid
+          DOWNLOAD_TEST_RELEASE_ID=0123456789abcdef0123456789abcdef
+          DSH_DESKTOP_MACOS_PACK_CONCURRENCY=4
+          DSH_DESKTOP_MACOS_ZIP_COMPRESSION_LEVEL=3
+          EOF
 
       - name: Prepare desktop package
         working-directory: src
