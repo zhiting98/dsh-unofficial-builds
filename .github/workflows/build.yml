@@ -13,7 +13,7 @@ on:
         options:
           - "false"
           - "true"
-        default: "false"
+        default: "true"
       macos:
         description: "Also build macOS (requires a supported macOS runner)"
         type: choice
@@ -236,7 +236,7 @@ jobs:
 
   release:
     name: Publish release
-    if: github.event.inputs.publish == 'true'
+    if: always() && github.event.inputs.publish == 'true' && needs.windows-x64.result == 'success'
     needs:
       - windows-x64
       - mac-arm64
@@ -264,7 +264,7 @@ jobs:
         with:
           tag_name: ${{ github.event.inputs.ref }}-unofficial.1
           name: "DSH ${{ github.event.inputs.ref }} (unofficial build)"
-          draft: true
+          draft: false
           prerelease: true
           files: |
             dist/**/*.exe
