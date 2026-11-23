@@ -89,8 +89,8 @@ jobs:
         working-directory: src/apps/desktop
         shell: pwsh
         run: |
-          Get-ChildItem -Recurse -File .desktop-build/targets/win-x64 -Include *.exe,*.msi,*.zip |
-            Select-Object FullName, Length |
+          Get-ChildItem -File .desktop-build/targets/win-x64/unsigned-artifacts -Include *.exe,*.msi,*.zip,*.blockmap |
+            Select-Object Name, Length |
             Format-Table -AutoSize
 
       - name: Upload Windows artifacts
@@ -98,9 +98,10 @@ jobs:
         with:
           name: win-x64
           path: |
-            src/apps/desktop/.desktop-build/targets/win-x64/*.exe
-            src/apps/desktop/.desktop-build/targets/win-x64/*.msi
-            src/apps/desktop/.desktop-build/targets/win-x64/*.zip
+            src/apps/desktop/.desktop-build/targets/win-x64/unsigned-artifacts/*.exe
+            src/apps/desktop/.desktop-build/targets/win-x64/unsigned-artifacts/*.msi
+            src/apps/desktop/.desktop-build/targets/win-x64/unsigned-artifacts/*.zip
+            src/apps/desktop/.desktop-build/targets/win-x64/unsigned-artifacts/*.blockmap
           if-no-files-found: error
           compression-level: 0
           retention-days: 14
