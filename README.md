@@ -1,5 +1,7 @@
 # DSH Unofficial Desktop Builds
 
+English | [简体中文](./README.zh.md)
+
 **Unofficial builds. Not affiliated with, sponsored by, or endorsed by DeepSeek.**
 
 This repository publishes desktop installers for **DSH (DeepSeek Harness)**, compiled directly from the upstream open-source repository at a pinned tag or commit, using the upstream packaging scripts.
