@@ -51,8 +51,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.22.3
-          cache: pnpm
-          cache-dependency-path: src/pnpm-lock.yaml
 
       - name: Install
         working-directory: src
@@ -128,8 +126,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.22.3
-          cache: pnpm
-          cache-dependency-path: src/pnpm-lock.yaml
 
       - name: Install
         working-directory: src
@@ -195,8 +191,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.22.3
-          cache: pnpm
-          cache-dependency-path: src/pnpm-lock.yaml
 
       - name: Install
         working-directory: src
