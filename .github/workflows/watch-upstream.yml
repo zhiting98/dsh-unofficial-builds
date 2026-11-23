@@ -2,8 +2,8 @@ name: watch-upstream
 
 on:
   schedule:
-    # 每 6 小时检查一次上游新版本；GitHub 不支持直接订阅另一个仓库的 release 事件，所以用轮询
-    - cron: "0 */6 * * *"
+    # 每小时检查一次上游新版本；GitHub 不支持直接订阅另一个仓库的 release 事件，所以用轮询
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:
